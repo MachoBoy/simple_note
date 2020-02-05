@@ -1,13 +1,17 @@
 import React from "react";
 import styled from "styled-components";
+import { bindActionCreators } from "redux";
+import * as NoteActions from "../../module/Note";
+import { connect } from "react-redux";
 
-const Header = () => {
+const Header = props => {
+  const { addNote, deleteNote } = props.actions;
   return (
     <Wrapper>
       <Title>Jiwon's Simple Note</Title>
       <ButtonWrapper>
-        <Button>ADD</Button>
-        <Button>REMOVE</Button>
+        <Button onClick={addNote}>ADD</Button>
+        <Button onClick={deleteNote}>REMOVE</Button>
       </ButtonWrapper>
     </Wrapper>
   );
@@ -45,4 +49,7 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-export default Header;
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators(NoteActions, dispatch)
+});
+export default connect(null, mapDispatchToProps)(Header);

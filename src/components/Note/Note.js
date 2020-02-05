@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 const Note = props => {
   const { editNote } = props.actions;
   const { notes, activeId } = props;
+
   return (
     <NoteWrapper>
       {notes.map(note => {
@@ -16,13 +17,15 @@ const Note = props => {
             <div key={id}>
               <Title
                 type="text"
-                value={title}
-                onChange={e => editNote(e.target.value)}
+                placeholder="Title"
+                defaultValue={title}
+                onChange={e => editNote("title", e.target.value)}
               ></Title>
               <NoteContent
                 type="text"
-                value={content}
-                onChange={e => editNote(e.target.value)}
+                placeholder="Contents"
+                defaultValue={content}
+                onChange={e => editNote("content", e.target.value)}
               ></NoteContent>
             </div>
           );
