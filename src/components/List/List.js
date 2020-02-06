@@ -7,10 +7,11 @@ import ListItem from "../ListItem/ListItem";
 
 const List = props => {
   const { setActiveID } = props.actions;
+  const { notes } = props;
 
   return (
     <ListWrapper>
-      {props.notes.map(note => {
+      {notes.map(note => {
         const { id, title, content } = note;
         return (
           <ListItem
@@ -22,7 +23,6 @@ const List = props => {
           />
         );
       })}
-      <ListItem />
     </ListWrapper>
   );
 };

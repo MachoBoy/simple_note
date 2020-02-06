@@ -1,5 +1,9 @@
 const initialState = {
-  notes: [],
+  notes: [
+    { id: "AAA", title: "This is A", content: "This is A content" },
+    { id: "BBB", title: "This is B", content: "This is B content" },
+    { id: "CCC", title: "This is C", content: "This is C content" }
+  ],
   activeId: null
 };
 
@@ -17,7 +21,7 @@ export const editNote = (key, value) => ({
   value
 });
 export const addNote = () => ({ type: ADD_NOTE });
-export const deleteNote = () => ({ type: DELETE_NOTE });
+export const deleteNote = id => ({ type: DELETE_NOTE, id });
 
 // reducer
 export default function reducer(state = initialState, action) {
@@ -45,9 +49,7 @@ export default function reducer(state = initialState, action) {
       console.log(state.notes);
       return { ...state, notes: [...state.notes, note] };
     case DELETE_NOTE:
-      const deleteResult = state.notes.filter(
-        note => note.id !== state.activeId
-      );
+      const deleteResult = state.notes.filter(note => note.id !== action.id);
       return {
         ...state,
         notes: deleteResult
